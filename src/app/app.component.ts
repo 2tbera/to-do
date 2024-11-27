@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getTask } from './features/task/task';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'to-do-etoro';
+  constructor(private store: Store) {
+    setTimeout(() => {
+      this.store.dispatch(getTask());
+    }, 2000);
+  }
 }
