@@ -24,7 +24,7 @@ import { TaskFormComponent } from '../../features';
 })
 export class HeaderComponent {
 
-  private taskService = inject(TaskService);
+  // private taskService = inject(TaskService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 
@@ -38,7 +38,7 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       // if (result) {
-        this.taskService.addTask(result);
+        // this.taskService.addTask(result);
         this.snackBar.open('Task added successfully', 'Close', { duration: 2000 });
       // }
     });

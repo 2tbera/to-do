@@ -2,9 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AlertService } from './alert.service';
-import { AlertModel } from '../models';
-import { AlertTypes } from '../enums';
+import { AlertService, AlertModel, AlertTypesENUM } from '../';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +12,11 @@ export class ApiService {
   private http: HttpClient = inject(HttpClient);
 
   private alertService: AlertService = inject(AlertService);
-  
+
   private environment = 'http://localhost:9000/';
 
-   formatErrors = (error: any): Observable<never> =>  {
-    this.alertService.statusHandler(new AlertModel(AlertTypes.Danger, 1000, error.message));
+  formatErrors = (error: any): Observable<never> => {
+    this.alertService.statusHandler(new AlertModel(AlertTypesENUM.Danger, 1000, error.message));
     return throwError(error);
   }
 

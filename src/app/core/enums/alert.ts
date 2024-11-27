@@ -1,4 +1,4 @@
-export enum AlertTypes {
+export enum AlertTypesENUM {
   Info ,
   Success,
   Warning,

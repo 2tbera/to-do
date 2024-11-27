@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , OnInit} from '@angular/core';
 import { TaskService } from '../../../core';
+import { Store } from '@ngrx/store';
+import { getTask } from '../task';
 
 @Component({
   selector: 'app-task-list',
@@ -7,7 +9,13 @@ import { TaskService } from '../../../core';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
 })
-export class TaskListComponent{
+export class TaskListComponent implements OnInit {
+
+  private store = inject(Store);
+  
+  ngOnInit() {
+    this.store.dispatch(getTask());
+  }
 
   // Injecting the TaskService to access the task state (signal)
   private taskService = inject(TaskService);

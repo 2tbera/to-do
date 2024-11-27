@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TaskListComponent } from './task-list.component';
-import { ItemComponent } from '../../../shared';
-import { TaskHttpService } from '../../../core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { taskReducer } from '../task/reducer/task.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { TaskEffects } from '../task/effects/task.effects';
+import { taskReducer, TaskEffects } from '../task';
+import { ItemComponent } from '../../../shared';
+import { TaskHttpService, TaskService } from '../../../core';
 
 @NgModule({
   imports: [
@@ -25,6 +24,6 @@ import { TaskEffects } from '../task/effects/task.effects';
       }
     ]),
   ],
-  providers: [TaskHttpService]
+  providers: [TaskHttpService, TaskService]
 })
 export class TaskListModule { }

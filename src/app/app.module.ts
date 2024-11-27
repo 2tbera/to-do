@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routes/app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertService, ApiService } from './core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,20 +18,21 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   ],
   imports: [
     BrowserModule,
-    HeaderComponent,
-    MatSnackBarModule,
-    AppRoutingModule,
     HttpClientModule,
-
+    
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({})
+    StoreDevtoolsModule.instrument({}),
+    
+    AppRoutingModule,
+    HeaderComponent,
 
+    MatSnackBarModule,
   ],
   providers: [
     ApiService,
     AlertService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlertModel } from '../models';
-import { AlertTypes } from '../enums';
+import { AlertModel , AlertTypesENUM } from '../';;
 
 @Injectable({
   providedIn: 'root',
@@ -14,16 +13,16 @@ export class AlertService {
       return;
     }
     switch (data.alertType) {
-      case AlertTypes.Success:
+      case AlertTypesENUM.Success:
         this.success(data.message, data.delay);
         break;
-      case AlertTypes.Danger:
+      case AlertTypesENUM.Danger:
         this.danger(data.message, data.delay);
         break;
-      case AlertTypes.Warning:
+      case AlertTypesENUM.Warning:
         this.warning(data.message, data.delay);
         break;
-      case AlertTypes.Info:
+      case AlertTypesENUM.Info:
         this.info(data.message, data.delay);
         break;
       default:
@@ -31,7 +30,7 @@ export class AlertService {
     }
   }
 
-  private alert(message: string, type: string, delay: number = 5000): void {
+  private alert = (message: string, type: string, delay: number = 5000): void => {
     this.snackBar.open(message, undefined, {
       duration: delay,
       horizontalPosition: 'right',
