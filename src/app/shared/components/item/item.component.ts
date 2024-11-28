@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
+import { Task } from '../../../core';
 
 @Component({
   standalone: true,
@@ -9,5 +10,9 @@ import { Component } from '@angular/core';
   styleUrl: './item.component.scss'
 })
 export class ItemComponent {
+
+  data = input<Task>();
+
+  @Input() item: Task = {} as Task;
 
 }

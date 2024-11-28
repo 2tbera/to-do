@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 import { AppRoutingModule } from './routes/app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertService, ApiService } from './core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AlertService, ApiService, LoaderService } from './core';
 import { HeaderComponent } from './components';
 import { HttpClientModule } from '@angular/common/http';
 import {  StoreModule } from '@ngrx/store';
@@ -28,10 +30,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     HeaderComponent,
 
     MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [
     ApiService,
     AlertService,
+    LoaderService,
     provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]

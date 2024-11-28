@@ -7,12 +7,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { taskReducer, TaskEffects } from '../task';
 import { ItemComponent } from '../../../shared';
-import { TaskHttpService, TaskService } from '../../../core';
+import { TaskHttpService } from '../../../core';
 
 @NgModule({
+  declarations: [TaskListComponent],
   imports: [
     CommonModule,
     MatCheckboxModule,
+    
     ItemComponent,
 
     StoreModule.forFeature('tasks', taskReducer),
@@ -24,6 +26,6 @@ import { TaskHttpService, TaskService } from '../../../core';
       }
     ]),
   ],
-  providers: [TaskHttpService, TaskService]
+  providers: [TaskHttpService]
 })
 export class TaskListModule { }

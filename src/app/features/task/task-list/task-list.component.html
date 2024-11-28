@@ -1,7 +1,8 @@
 <div>
   <h2>Tasks</h2>
-  aaaa
-  @for (item of tasks; track $index) {
-  <!-- <app-item /> -->
+  
+  @for (item of (tasks$ | async) ; track $index) {
+    <app-item [data]="item" [item]="item"></app-item>
   }
+
 </div>
