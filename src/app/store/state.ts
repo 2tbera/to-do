@@ -1,5 +1,4 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { taskReducer } from "../features/task/task";
 
 export interface AppState {
 }

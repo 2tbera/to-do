@@ -1,0 +1,20 @@
+<form [formGroup]="filterForm" class="task-list-filter">
+  <mat-form-field class="task-list-filter__search">
+    <mat-label>Search ... </mat-label>
+    <input #search matInput type="text" formControlName="searchTerm">
+  </mat-form-field>
+  
+  <section class="task-list-filter__sort">
+    <mat-button-toggle-group formControlName="filter">
+      <mat-button-toggle [value]="0">All</mat-button-toggle>
+      <mat-button-toggle [value]="1">Completed</mat-button-toggle>
+      <mat-button-toggle [value]="2">Uncompleted</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle-group formControlName="sort">
+      <mat-button-toggle [value]="0">due date</mat-button-toggle>
+      <mat-button-toggle [value]="1">priority</mat-button-toggle>
+      <mat-button-toggle [value]="2">creation date</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+</form>

@@ -1,0 +1,58 @@
+@if (task$ | async; as task) {
+<section class="task-details">
+    <div class="task-details__header">
+        @if(task?.dueDate) {
+        <div class="task-details__header-progression"
+            [ngClass]="{'task-details__header-progression--isExpired': task.isExpired }">
+            @if(task.isExpired) {
+            <h4 class="task-details__header-progression-expired">Expired</h4>
+            }
+            <div class="task-details__header-progression-dates">
+                <h5>creation date: {{task.createdAt | date: 'dd : MM : YYY'}}</h5>
+                <h5>due date: {{task.dueDate | date: 'dd : MM : YYY'}}</h5>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
+        </div>
+        }
+        <h2 class="task-details__header-title">{{task.title}}</h2>
+
+        <div class="task-details__header-test">
+
+            <div>Priority: <span
+                    class="task-details__header-priority task-details__header-priority--{{priorityENUM[task.priority]}}">{{priorityENUM[task.priority]}}</span>
+            </div>
+
+            <section class="task-details__header-actions">
+
+                <mat-checkbox [ngModel]="task.completed"
+                    (change)="onStatusChange(task.id, $event.checked)"></mat-checkbox>
+
+                <button (click)="openEditTaskDialog(task)" mat-mini-fab aria-label="Example icon button with a delete icon">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <button (click)="openDialog(mytemplate)" mat-mini-fab
+                    aria-label="Example icon button with a delete icon">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </section>
+
+        </div>
+    </div>
+
+    <p class="task-details__header-description">{{task.description}}</p>
+</section>
+
+
+
+<ng-template #mytemplate>
+    <h2 mat-dialog-title>Delete task</h2>
+    <mat-dialog-content>
+        Would you like to delete task?
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="false">No</button>
+        <button mat-button [mat-dialog-close]="task.id" cdkFocusInitial>Ok</button>
+    </mat-dialog-actions>
+</ng-template>
+}

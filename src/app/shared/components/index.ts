@@ -1,2 +1,2 @@
-
-export * from './item/item.component';
+export * from './task-form/task-form.component';
+export * from './task-item/task-item.component';

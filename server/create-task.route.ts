@@ -3,17 +3,20 @@ import {TASKS} from './db-data';
 
 export var taskKeyCounter = 100;
 
-export function createCourse(req: Request, res: Response) {
+export function createTask(req: Request, res: Response) {
 
-  console.log("Creating new task ...");
 
   const changes = req.body;
 
   const newTask = {
     id: taskKeyCounter,
-    seqNo: taskKeyCounter,
-    ...changes
+    ...changes,
+    createdAt: new Date(),
+    newDate: new Date()
   };
+
+
+  console.log("Creating new task ...",req.body );
 
   TASKS[newTask.id] = newTask;
 

@@ -1,0 +1,67 @@
+.task-details {
+    @media only screen and (min-width: 600px) {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    &__header {
+        margin: 10px 0;
+
+        &-progression {
+            &-expired {
+                text-align: center;
+            }
+
+            &-dates {
+                width: 100%;
+                display: flex;
+                padding: 0 20px;
+                box-sizing: border-box;
+                justify-content: space-between;
+            }
+
+            &--isExpired {
+                opacity: 0.3;
+                background-color: silver;
+            }
+
+        }
+
+        &-title {
+            text-align: center;
+        }
+
+        &-priority {
+            &--Low {
+                color: #00cc00;
+            }
+
+            &--Medium {
+                color: #ffcc00;
+            }
+
+            &--High {
+                color: #ff3300;
+            }
+        }
+
+        &-test {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-actions {
+            display: flex;
+            justify-content: center;
+            button:last-child {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    &-description {
+        padding: 0 20px;
+    }
+
+}

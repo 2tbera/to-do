@@ -1,8 +1,17 @@
-<div>
-  <h2>Tasks</h2>
-  
-  @for (item of (tasks$ | async) ; track $index) {
-    <app-item [data]="item" [item]="item"></app-item>
+<div class="task-list">
+
+  @if (taskFilters$ | async; as filters) {
+  <app-task-list-header class="task-list__header" [filterState]="filters" (filterChange)="onFilterChange($event)" />
   }
 
+  @if ((tasks$ | async); as tasks) {
+  @if (tasks.length) {
+  <cdk-virtual-scroll-viewport class="task-list__holder" itemSize="80px">
+    <app-task-item *cdkVirtualFor="let item of tasks; trackBy: trackById" [data]="item"
+      (taskClick)="onTaskClick($event)" (statusChange)="onStatusChange(item.id, $event)"></app-task-item>
+  </cdk-virtual-scroll-viewport>
+  } @else {
+  <div class="task-list__empty">No tasks found</div>
+  }
+  }
 </div>

@@ -1,9 +1,9 @@
-import {Request, Response} from 'express';
-import {TASKS} from "./db-data";
+import { Request, Response } from 'express';
+import { TASKS } from "./db-data";
 
 
 
-export function getAllCourses(req: Request, res: Response) {
+export function getAllTasks(req: Request, res: Response) {
 
   /*
       console.log("ERROR loading task!");
@@ -11,28 +11,31 @@ export function getAllCourses(req: Request, res: Response) {
       return;
   */
 
- console.log(`Called GET /api/task`);
+  console.log(`Called GET /api/task`);
 
   setTimeout(() => {
 
     console.log(`Returning GET /api/task`);
 
-    res.status(200).json({task:Object.values(TASKS)});
+    res.status(200).json({ task: Object.values(TASKS).map((task: any) => ({ ...task, newDate: new Date() }))});
 
   }, 1000);
 
 }
 
-export function getCourseById(req: Request, res: Response) {
+export function getTaskById(req: Request, res: Response) {
 
   setTimeout(() => {
-    const courseId = req.params["id"];
+    const TaskId = req.params["id"];
 
-    const task:any = Object.values(TASKS);
+    const task: any = Object.values(TASKS);
 
-    const course = task.find(course => course.id == courseId);
+    const Task = task.find(Task => Task.id == TaskId);
 
-    res.status(200).json(course);
+    if (!Task) {
+      res.status(404).json({ message: 'Task not found.' });
+    }
+    res.status(200).json({ ...Task, newDate: new Date() });
   })
 
 }

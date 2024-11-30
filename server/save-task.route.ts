@@ -1,12 +1,44 @@
-import {Request, Response} from 'express';
-import {TASKS} from "./db-data";
-import {setTimeout} from 'timers';
+import { Request, Response } from 'express';
+import { TASKS } from "./db-data";
+import { setTimeout } from 'timers';
 
 
-export function saveCourse(req: Request, res: Response) {
+export function saveTaskStatus(req: Request, res: Response) {
 
   /*
-    console.log("ERROR saving course!");
+    console.log("ERROR saving Task!");
+    res.sendStatus(500);
+    return;
+  */
+
+
+  const id = req.params["id"],
+    completed = req.body.status;
+
+  const newTask = {
+    ...TASKS[id],
+    completed,
+    newDate: new Date()
+  };
+
+  TASKS[id] = newTask;
+
+  console.log("new Task version ------ ", newTask);
+
+  setTimeout(() => {
+
+    res.status(200).json(TASKS[id]);
+
+  }, 1500);
+
+
+
+}
+
+export function saveTask(req: Request, res: Response) {
+
+  /*
+    console.log("ERROR saving Task!");
     res.sendStatus(500);
     return;
   */
@@ -15,16 +47,17 @@ export function saveCourse(req: Request, res: Response) {
   const id = req.params["id"],
     changes = req.body;
 
-  console.log("Saving course changes", id, JSON.stringify(changes));
+  console.log("Saving Task changes", id, JSON.stringify(changes));
 
   const newTask = {
     ...TASKS[id],
-    ...changes
+    ...changes,
+    newDate: new Date()
   };
 
   TASKS[id] = newTask;
 
-  console.log("new course version", newTask);
+  console.log("new Task version", newTask);
 
   setTimeout(() => {
 

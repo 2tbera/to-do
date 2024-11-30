@@ -1,0 +1,14 @@
+@if (data(); as data) {
+<mat-card class="task-item task-item--{{priorityENUM[data.priority]}}"
+    [ngClass]="{ 'task-item--isExpired': data?.isExpired }" appearance="outlined">
+    <mat-card-content class="task-item__content">
+        <mat-card-subtitle>{{data.title}} - {{data.dueDate | date : 'dd/MM/YYYY' }}</mat-card-subtitle>
+
+        <div class="task-item__content-actions">
+            <mat-checkbox [ngModel]="data.completed" (change)="onStatusChange($event.checked)"></mat-checkbox>
+            <button mat-button (click)="onTaskClick(data.id)">Learn More</button>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+}

@@ -1,2 +1,2 @@
-export * from './task/task-form/task-form.component';
+export * from './task/task-details/task-details.component';
 export * from './task/task-list/task-list.component';

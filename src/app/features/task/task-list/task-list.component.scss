@@ -1,13 +1,23 @@
-/* Optional: Style for task list items */
-div {
-    margin-bottom: 10px;
-  }
-  
-  mat-checkbox {
-    margin-right: 10px;
-  }
-  
-  button {
-    margin-left: 10px;
-  }
-  
+.task-list {
+
+    height: calc(100vh - 50px);
+
+    &__header {
+        height: 120px;
+
+    }
+
+    &__holder,
+    &__empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100% - 120px);
+        
+        @media only screen and (min-width: 600px) {
+            width: 70%;
+            margin: 0 auto;
+        }
+    }
+
+}

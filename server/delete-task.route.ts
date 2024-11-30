@@ -2,13 +2,13 @@
 import {Request, Response} from 'express';
 import {TASKS} from "./db-data";
 
-export function deleteCourse(req: Request, res: Response) {
+export function deleteTask(req: Request, res: Response) {
 
-  console.log("Deleting course ...");
+  console.log("Deleting Task ...");
 
   const id = req.params["id"];
 
-  const course = TASKS[id];
+  const Task = TASKS[id];
 
   delete TASKS[id];
 

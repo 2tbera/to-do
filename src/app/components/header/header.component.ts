@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatToolbarModule } from '@angular/material/toolbar'; // Import MatToolbarModule
 import { MatButtonModule } from '@angular/material/button';  // Optional: If you want buttons in the toolbar
 import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 import { CommonModule } from '@angular/common';
-import { TaskFormComponent } from '../../features';
+import { TaskFormComponent } from '../../shared';
+import { Store } from '@ngrx/store';
+import { createTask } from '../../features/task/store';
 
 
 @Component({
@@ -15,31 +16,27 @@ import { TaskFormComponent } from '../../features';
     CommonModule,
     MatToolbarModule, // Add MatToolbarModule to imports
     MatButtonModule,
-    MatIconModule,   // Add MatIconModule here
+    MatIconModule,   // Add MatIconModule here,
   ],
   standalone: true,
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
 
-  // private taskService = inject(TaskService);
   private dialog = inject(MatDialog);
-  private snackBar = inject(MatSnackBar);
-
+  private store = inject(Store);
 
   openAddTaskDialog() {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '400px',
-      data: null
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-      // if (result) {
-        // this.taskService.addTask(result);
-        this.snackBar.open('Task added successfully', 'Close', { duration: 2000 });
-      // }
+    dialogRef.afterClosed().subscribe(task => {
+      if (task) {
+        this.store.dispatch(createTask({ task }));
+      }
     });
   }
 }
