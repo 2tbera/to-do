@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { Task, TaskFilters } from '../../../core';
 import { Store } from '@ngrx/store';
 import { editTaskStatus, filterChange, getTask, selectSortedTasks, selectTaskFilters } from '../store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Task, TaskFilters } from '../../../core';
 
 @Component({
   selector: 'app-task-list',
@@ -14,11 +14,11 @@ import { Router } from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
 
-  private store = inject(Store);
-  private router = inject(Router);
-
   tasks$: Observable<Task[]> = new Observable<Task[]>();
   taskFilters$: Observable<TaskFilters> = new Observable<TaskFilters>();
+
+  private store = inject(Store);
+  private router = inject(Router);
 
   ngOnInit() {
     this.store.dispatch(getTask());

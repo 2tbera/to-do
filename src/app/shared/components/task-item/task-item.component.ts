@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { PriorityENUM, Task, TaskHttpService } from '../../../core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { PriorityENUM, Task } from '../../../core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,21 +16,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskItemComponent {
 
-  data = input<Task>();
-
-  taskClick = output<number>();
-
-  statusChange = output<boolean>();
-
   priorityENUM = PriorityENUM;
 
-  taskHttpService: TaskHttpService = inject(TaskHttpService);
+  data = input<Task>();
+  taskClick = output<number>();
+  statusChange = output<boolean>();
 
-  onStatusChange(checkboxed: boolean): void {
+  public onStatusChange(checkboxed: boolean): void {
     this.statusChange.emit(checkboxed);
   }
 
-  onTaskClick(id: number): void {
+  public onTaskClick(id: number): void {
     this.taskClick.emit(id);
   }
 

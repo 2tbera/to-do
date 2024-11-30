@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import {
@@ -24,7 +25,6 @@ import {
     getTaskSuccess
 } from '../';
 import { LoaderService, TaskHttpService } from '../../../../core';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class TaskEffects {
@@ -32,9 +32,15 @@ export class TaskEffects {
     private actions$: Actions = inject(Actions);
     private taskHttpService: TaskHttpService = inject(TaskHttpService);
     private loaderService: LoaderService = inject(LoaderService);
-
     private router: Router = inject(Router);
 
+    /**
+     * Effect to handle filter change actions.
+     * 
+     * This effect listens for the `filterChange` action and performs the following:
+     * - Sets the loader state to true.
+     * - Navigates to the current route with the new filter query parameters.
+     */
     filterChange$ = createEffect(() =>
         this.actions$.pipe(
             ofType(filterChange),
@@ -48,6 +54,14 @@ export class TaskEffects {
         ), { dispatch: false });
 
 
+    /**
+     * Effect to handle the `getTask` action.
+     * 
+     * This effect listens for the `getTask` action and performs the following:
+     * - Calls the `getTasks` method of `TaskHttpService` to fetch tasks.
+     * - On success, dispatches the `getTaskSuccess` action with the fetched tasks.
+     * - On failure, dispatches the `getTaskFailure` action with the error.
+     */
     getTask$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getTask),
@@ -62,6 +76,14 @@ export class TaskEffects {
             )
         ));
 
+    /**
+     * Effect to handle the `getTaskById` action.
+     * 
+     * This effect listens for the `getTaskById` action and performs the following:
+     * - Calls the `getTaskById` method of `TaskHttpService` to fetch a task by its ID.
+     * - On success, dispatches the `getTaskByIdSuccess` action with the fetched task.
+     * - On failure, dispatches the `getTaskByIdFailure` action with the error.
+     */
     getTaskById$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getTaskByid),
@@ -76,6 +98,14 @@ export class TaskEffects {
             )
         ));
 
+    /**
+     * Effect to handle the creation of a task.
+     * 
+     * This effect listens for the `createTask` action and makes an HTTP request to create a task using the `taskHttpService`.
+     * Once the task is successfully created,
+     * it dispatches the `createTaskSuccess` action with the created task. If there is an error during the task creation,
+     * it catches the error and dispatches the `createTaskFailure` action with the error.
+     */
     createTask$ = createEffect(() =>
         this.actions$.pipe(
             ofType(createTask),
@@ -89,6 +119,14 @@ export class TaskEffects {
             )
         ));
 
+    /**
+     * Effect to handle the editing of a task.
+     * 
+     * This effect listens for the `editTask` action and makes an HTTP request to edit a task using the `taskHttpService`.
+     * Once the task is successfully edited,
+     * it dispatches the `editTaskSuccess` action with the edited task. If there is an error during the task editing,
+     * it catches the error and dispatches the `editTaskFailure` action with the error.
+     */
     editTask$ = createEffect(() =>
         this.actions$.pipe(
             ofType(editTask),
@@ -102,6 +140,16 @@ export class TaskEffects {
             )
         ));
 
+
+
+    /**
+     * Effect to handle the editing of a task's status.
+     * 
+     * This effect listens for the `editTaskStatus` action
+     * and then makes an HTTP request to edit the task's status. Upon success, it dispatches
+     * the `editTaskStatusSuccess` action with the updated task. If an error occurs, it dispatches
+     * the `editTaskStatusFailure` action with the error.
+     */
     editTaskStatus$ = createEffect(() =>
         this.actions$.pipe(
             ofType(editTaskStatus),
@@ -115,6 +163,15 @@ export class TaskEffects {
             )
         ));
 
+    /**
+     * Effect to handle the deletion of a task.
+     * 
+     * This effect listens for the `deleteTask` action and performs the following:
+     * - Calls the `deleteTask` method of `TaskHttpService` to delete the task by its ID.
+     * - On success, dispatches the `deleteTaskSuccess` action with the deleted task's ID.
+     * - Navigates to the root route.
+     * - On failure, dispatches the `deleteTaskFailure` action with the error.
+     */
     deleteTask$ = createEffect(() =>
         this.actions$.pipe(
             ofType(deleteTask),
@@ -128,6 +185,4 @@ export class TaskEffects {
                 )
             )
         ));
-
-
 }

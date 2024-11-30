@@ -4,6 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AlertService, AlertModel, AlertTypesENUM, LoaderService } from '../';
 
+/**
+ * @description
+ * ApiService provides methods to interact with the backend API.
+ * It includes methods for HTTP GET, POST, PUT, DELETE, and file upload operations.
+ * The service handles error formatting and displays alerts using AlertService.
+ * It also manages loader state using LoaderService.
+ */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +23,7 @@ export class ApiService {
 
   private loaderService: LoaderService = inject(LoaderService);
 
-  private environment = 'http://localhost:9000/';
+  environment = 'http://localhost:9000/';
 
   formatErrors = (error: any): Observable<never> => {
     this.alertService.statusHandler(new AlertModel(AlertTypesENUM.Danger, 1000, error.message));
@@ -43,27 +51,27 @@ export class ApiService {
     };
   }
 
-  delete<T = any>(path: string, params?: any, api: string = 'apiUrl'): Observable<any> {
+  public delete<T = any>(path: string, params?: any, api: string = 'apiUrl'): Observable<any> {
     const options = this.createOptions(params, params);
     return this.http.delete<any>(`${this.environment}${path}`, options).pipe(catchError(this.formatErrors));
   }
 
-  get<T = any>(path: string, params?: any, api: string = 'apiUrl', responseType?: any): Observable<any> {
+  public get<T = any>(path: string, params?: any, api: string = 'apiUrl', responseType?: any): Observable<any> {
     const httpParams = this.createHttpParams(params);
     return this.http.get<T>(`${this.environment}${path}`, { params: httpParams, responseType }).pipe(catchError(this.formatErrors));
   }
 
-  post<T = any>(path: string, body: any, params?: any, api: string = 'apiUrl'): Observable<any> {
+  public post<T = any>(path: string, body: any, params?: any, api: string = 'apiUrl'): Observable<any> {
     const options = this.createOptions(params);
     return this.http.post<T>(`${this.environment}${path}`, JSON.stringify(body), options).pipe(catchError(this.formatErrors));
   }
 
-  put<T = any>(path: string, body: object = {}, params?: any, api: string = 'apiUrl'): Observable<any> {
+  public put<T = any>(path: string, body: object = {}, params?: any, api: string = 'apiUrl'): Observable<any> {
     const options = this.createOptions(params);
     return this.http.put<T>(`${this.environment}${path}`, JSON.stringify(body), options).pipe(catchError(this.formatErrors));
   }
 
-  upload<T = any>(path: string, body: any, params?: any, api: string = 'apiUrl'): Observable<any> {
+  public upload<T = any>(path: string, body: any, params?: any, api: string = 'apiUrl'): Observable<any> {
     const httpParams = this.createHttpParams(params);
     return this.http.post(`${this.environment}${path}`, body, { params: httpParams }).pipe(catchError(this.formatErrors));
   }

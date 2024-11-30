@@ -1,54 +1,48 @@
 @if (task$ | async; as task) {
-<section class="task-details">
+<section class="task-details" aria-labelledby="task-title" aria-describedby="task-description">
     <div class="task-details__header">
         @if(task?.dueDate) {
-        <div class="task-details__header-progression"
-            [ngClass]="{'task-details__header-progression--isExpired': task.isExpired }">
+        <section class="task-details__header-progression"
+            [ngClass]="{'task-details__header-progression--isExpired': task.isExpired }"
+            aria-labelledby="task-progression">
             @if(task.isExpired) {
-            <h4 class="task-details__header-progression-expired">Expired</h4>
+            <h4 id="task-progression" class="task-details__header-progression-expired">Expired</h4>
             }
             <div class="task-details__header-progression-dates">
-                <h5>creation date: {{task.createdAt | date: 'dd : MM : YYY'}}</h5>
-                <h5>due date: {{task.dueDate | date: 'dd : MM : YYY'}}</h5>
+                <h5>Creation date: <time attr.datetime="{{task.createdAt | date: 'yyyy-MM-dd'}}">{{task.createdAt | date: 'dd : MM : yyyy'}}</time></h5>
+                <h5>Due date: <time attr.datetime="{{task.dueDate | date: 'yyyy-MM-dd'}}">{{task.dueDate | date: 'dd : MM : yyyy'}}</time></h5>
             </div>
-            <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
-        </div>
+            <mat-progress-bar mode="determinate" [value]="task.progress" aria-label="Task progress"></mat-progress-bar>
+        </section>
         }
-        <h2 class="task-details__header-title">{{task.title}}</h2>
-
-        <div class="task-details__header-test">
-
-            <div>Priority: <span
-                    class="task-details__header-priority task-details__header-priority--{{priorityENUM[task.priority]}}">{{priorityENUM[task.priority]}}</span>
+        <section>
+            <h2 id="task-title" class="task-details__header-title">{{task.title}}</h2>
+            <div class="task-details__header-test">
+                <div>Priority: <span
+                        class="task-details__header-priority task-details__header-priority--{{priorityENUM[task.priority]}}">{{priorityENUM[task.priority]}}</span>
+                </div>
+                <section class="task-details__header-actions">
+                    <mat-checkbox [ngModel]="task.completed"
+                        (change)="onStatusChange(task.id, $event.checked)" aria-label="Mark task as completed"></mat-checkbox>
+                    <button (click)="openEditTaskDialog(task)" mat-mini-fab
+                        aria-label="Edit task">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="openDialog(mytemplate)" mat-mini-fab
+                        aria-label="Delete task">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </section>
             </div>
-
-            <section class="task-details__header-actions">
-
-                <mat-checkbox [ngModel]="task.completed"
-                    (change)="onStatusChange(task.id, $event.checked)"></mat-checkbox>
-
-                <button (click)="openEditTaskDialog(task)" mat-mini-fab aria-label="Example icon button with a delete icon">
-                    <mat-icon>edit</mat-icon>
-                </button>
-
-                <button (click)="openDialog(mytemplate)" mat-mini-fab
-                    aria-label="Example icon button with a delete icon">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </section>
-
-        </div>
+        </section>
     </div>
-
-    <p class="task-details__header-description">{{task.description}}</p>
+    <p id="task-description" class="task-details__header-description">{{task.description}}</p>
 </section>
-
-
 
 <ng-template #mytemplate>
     <h2 mat-dialog-title>Delete task</h2>
     <mat-dialog-content>
-        Would you like to delete task?
+        Would you like to delete this task?
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button [mat-dialog-close]="false">No</button>

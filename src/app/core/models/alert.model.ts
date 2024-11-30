@@ -1,7 +1,5 @@
 import { AlertTypesENUM } from "../";
 
-;
-
 export class AlertModel {
   alertType: AlertTypesENUM;
   delay: number;

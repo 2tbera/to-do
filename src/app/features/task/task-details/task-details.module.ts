@@ -32,7 +32,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
 
     MatDialogTitle,
-
     TaskItemComponent,
 
     StoreModule.forFeature('tasks', taskReducer),

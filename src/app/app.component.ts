@@ -4,8 +4,7 @@ import { LoaderService } from './core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: false,
-  styleUrl: './app.component.scss'
+  standalone: false
 })
 export class AppComponent {
   private loaderService: LoaderService = inject(LoaderService);

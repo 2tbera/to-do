@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BaseSubscribeClass, TaskFilters } from '../../../../../core';
-import { distinctUntilChanged, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { distinctUntilChanged, takeUntil } from 'rxjs';
+import { BaseSubscribeClass, FilterENUM, SortENUM, TaskFilters } from '../../../../../core';
 
 @Component({
   selector: 'app-task-list-header',
@@ -15,7 +15,7 @@ export class TaskListHeaderComponent extends BaseSubscribeClass implements OnIni
 
   filterForm: FormGroup = new FormGroup({});
 
-  filterState = input<TaskFilters>();
+  filterState = input<TaskFilters>({ filter: FilterENUM.All, sort: SortENUM.CreationDate, searchTerm: '' });
   filterChange = output<TaskFilters>();
 
   private fb = inject(FormBuilder);
@@ -36,7 +36,7 @@ export class TaskListHeaderComponent extends BaseSubscribeClass implements OnIni
   }
 
   private initRrevState() {
-    let { filter, sort, searchTerm } = this.route.snapshot.queryParams;
+    let { filter, sort, searchTerm } = this.route.snapshot.queryParams || {};
     if (!filter || !sort || !searchTerm) {
       return;
     }

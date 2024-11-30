@@ -14,11 +14,20 @@ export const selectAllTaskEntities = createSelector(
   adapter.getSelectors().selectEntities
 );
 
+/**
+ * Selector to get the current task filters from the task state.
+ * @returns {FilterState} - The current filter state which includes filter and sort criteria.
+ */
 export const selectTaskFilters = createSelector(
   selectTaskState,
   (data) => data.filter
 );
 
+/**
+ * Selector to get a task by its ID.
+ * @param {string} taskId - The ID of the task to select.
+ * A selector that returns the task with the specified ID.
+ */
 export const selectTaskById = (taskId: string) => createSelector(
   selectAllTaskEntities,
   (entities): Task | undefined => {
@@ -26,6 +35,13 @@ export const selectTaskById = (taskId: string) => createSelector(
   }
 );
 
+/**
+ * Selector to get tasks filtered and sorted based on the current filter and sort state.
+ * @param {Array<Task>} tasks - The list of all tasks.
+ * @param {FilterState} filterState - The current filter and sort state.
+ * @returns {Array<Task>} - The list of tasks filtered and sorted according to the filter and sort state.
+ * Tasks are also filtered by a search term in the title or description.
+ */
 export const selectSortedTasks = createSelector(
   selectAllTasks,
   selectTaskFilters,

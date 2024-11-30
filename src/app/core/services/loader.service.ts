@@ -1,4 +1,12 @@
 import { Injectable, signal } from '@angular/core';
+ 
+/**
+ * Service to manage the state of a loader.
+ * 
+ * This service provides methods to set and get the state of a loader,
+ * which can be used to show or hide a loading indicator in the application.
+ *
+ */
 
 @Injectable({
   providedIn: 'root',
@@ -6,11 +14,11 @@ import { Injectable, signal } from '@angular/core';
 export class LoaderService {
   private loaderState = signal(false);
 
-  setLoaderState(state: boolean): void {
+  public setLoaderState(state: boolean): void {
     this.loaderState.set(state);
   }
 
-  getLoaderState(): boolean {
+  public getLoaderState(): boolean {
     return this.loaderState();
   }
 }

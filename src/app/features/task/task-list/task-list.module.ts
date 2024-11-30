@@ -39,6 +39,6 @@ import { TaskEffects, taskReducer } from '../store';
       }
     ])
 
-  ],
+  ]
 })
 export class TaskListModule { }

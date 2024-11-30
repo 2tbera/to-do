@@ -1,20 +1,23 @@
-<form [formGroup]="filterForm" class="task-list-filter">
+<form [formGroup]="filterForm" class="task-list-filter" aria-labelledby="filterFormLabel">
+  <h2>Task List Filter</h2>
+  
   <mat-form-field class="task-list-filter__search">
-    <mat-label>Search ... </mat-label>
-    <input #search matInput type="text" formControlName="searchTerm">
+    <mat-label for="search">Search</mat-label>
+    <input #search matInput type="text" formControlName="searchTerm" aria-describedby="searchHelp">
   </mat-form-field>
   
-  <section class="task-list-filter__sort">
-    <mat-button-toggle-group formControlName="filter">
-      <mat-button-toggle [value]="0">All</mat-button-toggle>
-      <mat-button-toggle [value]="1">Completed</mat-button-toggle>
-      <mat-button-toggle [value]="2">Uncompleted</mat-button-toggle>
+  <section class="task-list-filter__sort" aria-labelledby="sortOptionsLabel">
+    
+    <mat-button-toggle-group formControlName="filter" aria-label="Filter tasks">
+      <mat-button-toggle [value]="0" aria-label="Show all tasks">All</mat-button-toggle>
+      <mat-button-toggle [value]="1" aria-label="Show completed tasks">Completed</mat-button-toggle>
+      <mat-button-toggle [value]="2" aria-label="Show uncompleted tasks">Uncompleted</mat-button-toggle>
     </mat-button-toggle-group>
 
-    <mat-button-toggle-group formControlName="sort">
-      <mat-button-toggle [value]="0">due date</mat-button-toggle>
-      <mat-button-toggle [value]="1">priority</mat-button-toggle>
-      <mat-button-toggle [value]="2">creation date</mat-button-toggle>
+    <mat-button-toggle-group formControlName="sort" aria-label="Sort tasks">
+      <mat-button-toggle [value]="0" aria-label="Sort by due date">due date</mat-button-toggle>
+      <mat-button-toggle [value]="1" aria-label="Sort by priority">priority</mat-button-toggle>
+      <mat-button-toggle [value]="2" aria-label="Sort by creation date">creation date</mat-button-toggle>
     </mat-button-toggle-group>
   </section>
 </form>

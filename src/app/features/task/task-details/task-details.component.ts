@@ -26,7 +26,7 @@ export class TaskDetailsComponent extends BaseSubscribeClass implements OnInit {
   task$: Observable<Task | undefined> = new Observable<Task>();
 
   ngOnInit() {
-    let { id } = this.route.snapshot.params;
+    let { id } = this.route.snapshot.params || {};
     this.fetchTask(id);
     this.task$ = this.store.select(selectTaskById(id));
   }

@@ -14,9 +14,9 @@ import { createTask } from '../../features/task/store';
   selector: 'app-header',
   imports: [
     CommonModule,
-    MatToolbarModule, // Add MatToolbarModule to imports
+    MatToolbarModule,
     MatButtonModule,
-    MatIconModule,   // Add MatIconModule here,
+    MatIconModule,
   ],
   standalone: true,
   templateUrl: './header.component.html',
@@ -28,7 +28,7 @@ export class HeaderComponent {
   private dialog = inject(MatDialog);
   private store = inject(Store);
 
-  openAddTaskDialog() {
+  public openAddTaskDialog() {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '400px',
     });

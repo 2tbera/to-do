@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, OnInit } from '@angular/core';
-import { PriorityENUM, Task } from '../../../core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { PriorityENUM } from '../../../core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +31,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule
-
   ],
   templateUrl: './task-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,11 +48,10 @@ export class TaskFormComponent implements OnInit {
   private dialogRef: MatDialogRef<TaskFormComponent> = inject(MatDialogRef);
 
   ngOnInit(): void {
-    console.log(this.data);
     this.initForm();
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     const task = this.data ? { ...this.data, ...this.taskForm.value } : this.taskForm.value;
     this.dialogRef.close(task);
   }

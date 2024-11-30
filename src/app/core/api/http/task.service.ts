@@ -2,6 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ApiService, CREATE_TASK, DELETE_TASK, GET_TASK_BYID, GET_TASKS, Task, UPDATE_TASK, UPDATE_TASK_STATUS } from '../../';
 
+/**
+ * Service to handle HTTP operations related to tasks.
+ * 
+ * @remarks
+ * This service provides methods to perform CRUD operations on tasks using the ApiService.
+ */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +29,6 @@ export class TaskHttpService {
   }
 
   public editTask(id: number, task: Task): Observable<Task> {
-
-    console.log('task', task);
     return this.api.put<{ task: Task[] }>(`${UPDATE_TASK}${id}`, task).pipe(
       map((task: Task) => new Task(task))
     );

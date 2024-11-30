@@ -5,8 +5,10 @@
         <mat-card-subtitle>{{data.title}} - {{data.dueDate | date : 'dd/MM/YYYY' }}</mat-card-subtitle>
 
         <div class="task-item__content-actions">
-            <mat-checkbox [ngModel]="data.completed" (change)="onStatusChange($event.checked)"></mat-checkbox>
-            <button mat-button (click)="onTaskClick(data.id)">Learn More</button>
+            <mat-checkbox [ngModel]="data.completed" (change)="onStatusChange($event.checked)"
+                aria-label="Mark task as completed"></mat-checkbox>
+            <button mat-button (click)="onTaskClick(data.id)" [attr.aria-label]="'Learn more about ' + data.title">Learn
+                More</button>
         </div>
 
     </mat-card-content>
