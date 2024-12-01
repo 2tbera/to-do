@@ -7,13 +7,7 @@ This is a full-stack web application built using Angular for the frontend and a 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [CSS Architecture](#css-architecture)
-- [API Overview](#api-overview)
-- [Getting Started](#getting-started)
-- [Running the Application](#running-the-application)
-- [Build](#build)
-- [Running Tests](#running-tests)
-- [Contributing](#contributing)
-- [License](#license)
+- [Project Directory Structure](#project-directory-structure)
 
 ## Features
 
