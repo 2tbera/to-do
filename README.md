@@ -22,7 +22,6 @@ This is a full-stack web application built using Angular for the frontend and a 
 - Asynchronous actions handled via NgRx Effects
 - Entity-based state management using NgRx Entity
 - Material Design components with Angular Material
-- RESTful API endpoints for backend communication
 - Scalable CSS architecture using the BEM methodology
 
 ## Technologies Used
@@ -35,7 +34,6 @@ This is a full-stack web application built using Angular for the frontend and a 
 - **Backend**:
   - TypeScript
   - `ts-node` for runtime execution of TypeScript
-  - Express (optional, if using for API routing)
 
 ## CSS Architecture
 
@@ -49,11 +47,69 @@ This project uses the **BEM (Block Element Modifier)** methodology for organizin
   - Example: `card__title`
 - **Modifier**: Represents a different state or version of a block or element.
   - Example: `card--featured`, `card__title--highlighted`
-
-### Example
-
+  
 ```html
 <div class="card card--featured">
   <h2 class="card__title card__title--highlighted">Featured Card</h2>
   <p class="card__content">This is the content of the card.</p>
 </div>
+```
+
+### Project Directory Structure
+
+Below is the directory structure of the project. It follows a modular and scalable design, with separate folders for core modules, features, shared components, and state management.
+
+
+```plaintext
+
+.
+├── server
+│   └── server.tsconfig.json
+├── src
+│   ├── app
+│   │   ├── app.component.html
+│   │   ├── app.component.ts
+│   │   ├── app.module.ts
+│   │   ├── components
+│   │   ├── core
+│   │   │   ├── api
+│   │   │   │   ├── http
+│   │   │   │   │   └── # API services for HTTP layer
+│   │   │   │   └── # All Http related files
+│   │   │   ├── class
+│   │   │   │   └── # Shared classes (base classes for global use)
+│   │   │   ├── enums
+│   │   │   │   └── # Enum definitions
+│   │   │   ├── models
+│   │   │   │   └── # Data models
+│   │   │   └── services
+│   │   │       └── # Global root level Service 
+│   │   ├── features
+│   │   │   └──  <feature / group>
+│   │   │       ├── store
+│   │   │       │   ├── actions
+│   │   │       │   │   └──  # Feature related actions
+│   │   │       │   ├── effects
+│   │   │       │   │   └── # Feature related effects
+│   │   │       │   ├── reducer
+│   │   │       │   │   └── # Feature reducers
+│   │   │       │   └── selectors
+│   │   │       │       └── # Feature related selectors
+│   │   │       └── # Feature module
+│   │   ├── routes
+│   │   │   ├── app-routing.module.ts
+│   │   │   └── # Route configurations / routes
+│   │   ├── shared
+│   │   │   ├── components
+│   │   │   │   └── # Shared components
+│   │   │   └── # Shared ( Components / Pipes / Directives ... )
+│   │   └── store
+│   │       └── # Root level State
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+├── tsconfig.json
+├── README.md
+├── angular.json
+└── package.json
+```
