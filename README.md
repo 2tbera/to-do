@@ -1,59 +1,59 @@
-# ToDoEtoro
+# Angular Project with API Backend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+This is a full-stack web application built using Angular for the frontend and a backend implemented in TypeScript using `ts-node`. The project follows the BEM methodology for CSS architecture to maintain scalable and maintainable styles.
 
-## Development server
+## Table of Contents
 
-To start a local development server, run:
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [CSS Architecture](#css-architecture)
+- [API Overview](#api-overview)
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Build](#build)
+- [Running Tests](#running-tests)
+- [Contributing](#contributing)
+- [License](#license)
 
-```bash
-ng serve
-```
+## Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Frontend**: Angular with state management via NgRx
+- **Backend**: TypeScript-powered API using `ts-node`
+- Asynchronous actions handled via NgRx Effects
+- Entity-based state management using NgRx Entity
+- Material Design components with Angular Material
+- RESTful API endpoints for backend communication
+- Scalable CSS architecture using the BEM methodology
 
-## Code scaffolding
+## Technologies Used
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Frontend**:
+  - Angular
+  - NgRx, NgRx Effects, NgRx Entity
+  - Angular Material
+  - BEM methodology for CSS
+- **Backend**:
+  - TypeScript
+  - `ts-node` for runtime execution of TypeScript
+  - Express (optional, if using for API routing)
 
-```bash
-ng generate component component-name
-```
+## CSS Architecture
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This project uses the **BEM (Block Element Modifier)** methodology for organizing CSS. BEM promotes consistency and scalability by breaking styles into reusable blocks, elements, and modifiers.
 
-```bash
-ng generate --help
-```
+### BEM Naming Convention
 
-## Building
+- **Block**: Represents a standalone entity.
+  - Example: `card`
+- **Element**: Represents a part of a block.
+  - Example: `card__title`
+- **Modifier**: Represents a different state or version of a block or element.
+  - Example: `card--featured`, `card__title--highlighted`
 
-To build the project run:
+### Example
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```html
+<div class="card card--featured">
+  <h2 class="card__title card__title--highlighted">Featured Card</h2>
+  <p class="card__content">This is the content of the card.</p>
+</div>
